@@ -11,7 +11,7 @@ read -p "Is the directory above correct to run reset on? (y/n) " -n 1 DIRCONFIRM
 if [[ $DIRCONFIRM =~ ^[Yy]$ ]]; then
     docker compose down
     docker image rm stable-diffusion_stable-diffusion:latest
-    docker volume rm stable-diffusion_conda_env
+    docker volume rm stable-diffusion_micromamba_env
     docker volume rm stable-diffusion_root_profile
     echo "Remove ./src"
     sudo rm -rf src

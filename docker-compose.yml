@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/sd
       - ./outputs:/sd/outputs
-      - conda_env:/opt/conda
+      - micromamba_env:~/micromamba
       - root_profile:/root
     ports:
       - '7860:7860'
@@ -21,5 +21,5 @@ services:
             - capabilities: [gpu]
 
 volumes:
-  conda_env:
+  micromamba_env:
   root_profile:

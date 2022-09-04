@@ -1,3 +1,14 @@
+# README
+
+This is a fork of [hlky's stable diffusion]() that uses the package/environment manager mamba instead of conda.
+
+This due to two reasons:
+
+- mamba is fast, ⚡️ fast
+- I couldn't get conda to work in docker on a server I have access to due to [this issue](https://github.com/conda/conda/issues/11741). I.e. getting stuck at `Collecting package metadata (repodata.json)`. Using mamba resolves this issue.
+
+---
+
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/altryne/sd-webui-colab/blob/main/Stable_Diffusion_WebUi_Altryne.ipynb)
 
 # [Installation](https://github.com/hlky/stable-diffusion/wiki/Installation)

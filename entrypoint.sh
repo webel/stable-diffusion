@@ -25,28 +25,28 @@ ENV_MODIFED_FILE="/sd/.env_updated"
 if [[ -f $ENV_MODIFED_FILE ]]; then ENV_MODIFIED_CACHED=$(<${ENV_MODIFED_FILE}); else ENV_MODIFIED_CACHED=0; fi
 
 # Create/update conda env if needed
-if ! conda env list | grep ".*${ENV_NAME}.*" >/dev/null 2>&1; then
-    echo "Could not find conda env: ${ENV_NAME} ... creating ..."
-    conda env create -f $ENV_FILE
+if ! micromamba env list | grep ".*${ENV_NAME}.*" >/dev/null 2>&1; then
+    echo "Could not find mamba env: ${ENV_NAME} ... creating ..."
+    micromamba create -f $ENV_FILE
     echo "source activate ${ENV_NAME}" > /root/.bashrc
     ENV_UPDATED=1
 elif [[ ! -z $CONDA_FORCE_UPDATE && $CONDA_FORCE_UPDATE == "true" ]] || (( $ENV_MODIFIED > $ENV_MODIFIED_CACHED )); then
     echo "Updating conda env: ${ENV_NAME} ..."
-    conda env update --file $ENV_FILE --prune
+    micromamba update --file $ENV_FILE --prune
     ENV_UPDATED=1
 fi
 
 # Clear artifacts from conda after create/update
 # @see https://docs.conda.io/projects/conda/en/latest/commands/clean.html
 if (( $ENV_UPDATED > 0 )); then
-    conda clean --all
+    micromamba clean --all
     echo -n $ENV_MODIFIED > $ENV_MODIFED_FILE
 fi
 
-# activate conda env
-. /opt/conda/etc/profile.d/conda.sh
-conda activate $ENV_NAME
-conda info | grep active
+# activate env
+. ~/micromamba/etc/profile.d/micromamba.sh
+micromamba activate $ENV_NAME
+micromamba info | grep active
 
 # Function to checks for valid hash for model files and download/replaces if invalid or does not exist
 validateDownloadModel() {
