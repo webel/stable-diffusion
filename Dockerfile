@@ -11,9 +11,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+ENV MICROMAMBA_DIR /root/micromamba
 RUN wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 RUN ./bin/micromamba shell init -s bash -p ~/micromamba
-RUN source ~/.bashrc
+ENV PATH=$MICROMAMBA_DIR/bin:$PATH
 
 # Install font for prompt matrix
 COPY /data/DejaVuSans.ttf /usr/share/fonts/truetype/
