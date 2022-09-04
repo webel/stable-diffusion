@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/sd
       - ./outputs:/sd/outputs
-      - micromamba_env:~/micromamba
+      - micromamba_env:/root/micromamba
       - root_profile:/root
     ports:
       - '7860:7860'
