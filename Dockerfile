@@ -12,9 +12,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install mamba
-ENV MICROMAMBDA_DIR ~/micromamba
+ENV MICROMAMBA_DIR /root/micromamba
 RUN curl micro.mamba.pm/install.sh | bash
-RUN source /root/.bashrc
 # Install font for prompt matrix
 COPY /data/DejaVuSans.ttf /usr/share/fonts/truetype/
 

@@ -24,6 +24,8 @@ ENV_MODIFIED=$(date -r $ENV_FILE "+%s")
 ENV_MODIFED_FILE="/sd/.env_updated"
 if [[ -f $ENV_MODIFED_FILE ]]; then ENV_MODIFIED_CACHED=$(<${ENV_MODIFED_FILE}); else ENV_MODIFIED_CACHED=0; fi
 
+sh /root/micromamba/etc/profile.d/micromamba.sh
+
 # Create/update conda env if needed
 if ! micromamba env list | grep ".*${ENV_NAME}.*" >/dev/null 2>&1; then
     echo "Could not find mamba env: ${ENV_NAME} ... creating ..."
@@ -44,7 +46,7 @@ if (( $ENV_UPDATED > 0 )); then
 fi
 
 # activate env
-. ~/micromamba/etc/profile.d/micromamba.sh
+sh /root/micromamba/etc/profile.d/micromamba.sh
 micromamba activate $ENV_NAME
 micromamba info | grep active
 
